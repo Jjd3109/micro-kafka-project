@@ -1,0 +1,9 @@
+rootProject.name = 'micro-kafka-project'
+
+
+include 'service'
+include 'service:article'
+include 'service:comment'
+include 'service:hot-article'
+include 'service:like'
+include 'service:view'
