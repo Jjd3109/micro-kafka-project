@@ -1,9 +1,52 @@
 package micro.kafka.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 
-// @Table(name = "article")
-// @Entity
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Table(name = "article")
+@Getter
+@Entity
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long articleId;
+
+	private String title;
+	private String content;
+	private Long boardId; // shard key
+	private Long writerId;
+	private LocalDateTime createdAt;
+	private LocalDateTime modifiedAt;
+
+	public static Article create(String title, String content, Long boardId, Long writerId) {
+		Article article = new Article();
+
+		article.title = title;
+		article.content = content;
+		article.boardId = boardId;
+		article.writerId = writerId;
+		article.createdAt = LocalDateTime.now();
+		article.modifiedAt = article.createdAt;
+		return article;
+
+	}
+
+	public void update(String title, String content) {
+		this.title = title;
+		this.content = content;
+		modifiedAt = LocalDateTime.now();
+	}
+
 }

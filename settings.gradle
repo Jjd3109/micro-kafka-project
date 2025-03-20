@@ -2,6 +2,7 @@ rootProject.name = 'micro-kafka-project'
 
 
 include 'service'
+include 'common:outbox-message-relay'
 include 'service:article'
 include 'service:comment'
 include 'service:hot-article'
